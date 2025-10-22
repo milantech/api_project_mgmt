@@ -75,7 +75,7 @@ def create_user():
                     created_date,
                     updated_date) VALUES ( %s, %s, %s, %s,%s,%s, %s,%s, %s,%s, %s,%s);
                     """
-            #sql = "INSERT INTO tbl_employee (name, age) VALUES (%s, %s)"
+       
             cursor.execute(sql, (emp_code, department_id,joining_date,fullname,gender,email,city,state,country,designationlevel,created_date,updated_date))
             conn.commit()
         return jsonify({"message": "User created successfully"}), 201
@@ -305,8 +305,9 @@ def addProjectTeam():
 
 @app.route("/getTeamMembersByDeptId", methods=["GET"])
 def getTeamMembersByDeptHead():
-    data = request.json
-    department_id = data.get("department_id")
+    #data = request.json
+    department_id = request.args.get('department_id')
+    #department_id = data.get("department_id")
     print(department_id,"department_id")
     try:
         conn = get_db_connection()
